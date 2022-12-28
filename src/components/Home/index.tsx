@@ -31,7 +31,10 @@ function Home() {
 
     const shortUrl = makeId(5);
 
-    await addDoc(collection(db, 'urls'), { shortUrl, originUrl: url });
+    await addDoc(collection(db, 'urls'), {
+      shortUrl,
+      originUrl: url?.startsWith('http') ? url : `https://${url}`,
+    });
 
     setState((_) => ({ ..._, showModal: true, shortUrl, url: '' }));
 
