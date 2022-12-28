@@ -1,27 +1,25 @@
-import React from "react";
-import { useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { collection, getDocs } from '@firebase/firestore';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { db } from "../../config";
+import { db } from '../../config';
 
 function Link() {
-  interface ParamTypes {
-    shorturl: string;
-  }
-  const { shorturl } = useParams<ParamTypes>();
-  const history = useHistory();
+  const { shorturl } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const dbQuery = db
-      .collection("urls")
-      .where("shortUrl", "==", shorturl)
-      .onSnapshot((data) => {
-        if (data.empty) {
-          return history.push("/");
-        }
-        const resData = data.docs[0].data();
-        window.location.replace(resData.url);
-      });
+    (async () => {
+      const noteSnapshot = await getDocs(collection(db, 'urls'));
+      const notesList = noteSnapshot.docs.map((doc) => doc.data());
+      const shortUrlObj = notesList?.find((it) => it.shortUrl === shorturl);
+
+      if (shortUrlObj?.originUrl) {
+        window.location.replace(shortUrlObj?.originUrl);
+      } else {
+        navigate('/');
+      }
+    })();
   }, []);
 
   return (

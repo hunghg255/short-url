@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -15,8 +15,11 @@ const firebaseConfig = {
   projectId,
   storageBucket,
   messagingSenderId,
-  appId
+  appId,
 };
-console.log(firebaseConfig);
-const app = firebase.initializeApp(firebaseConfig);
-export const db = app.firestore();
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+export { db };
