@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { db } from '../../config';
 
+import './index.scss';
+
 function Link() {
   const { shorturl } = useParams();
   const navigate = useNavigate();
@@ -20,11 +22,14 @@ function Link() {
         navigate('/');
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <h2>Redirecting...</h2>
+      <div className='loading-animation'>
+        <div className='spinner'></div>
+      </div>
     </div>
   );
 }

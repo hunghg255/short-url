@@ -4,122 +4,122 @@
   height: 100vh;
   background-color: #f9f6fc;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   & .form_holder {
     position: relative;
-    padding: 0 1.2rem;
     & #form__submnt {
       position: relative;
       display: flex;
       min-width: 300px;
       width: 100%;
       max-width: 600px;
+    }
+  }
 
-      & .url_ {
-        position: relative;
-        height: 37px;
-        text-indent: 1rem;
-        flex-grow: 1;
-        border-radius: 30px;
-        border: 2px solid #d5d5d5;
-        box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s ease;
-        &:hover {
-          border-color: slateblue;
-          box-shadow: none;
-          transition: all 0.5s ease;
-        }
-      }
-      & .sub_go {
-        position: relative;
-        margin-left: 10px;
-        //   padding: 1.1rem;
-        width: 35px;
-        height: 35px;
-        border: 2px solid red;
-        border-radius: 50%;
-        cursor: pointer;
-        background-color: green;
-        color: #ffffff;
-        border-color: #ffffff;
-        box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
-        transition: all 0.5s ease;
-        &:hover {
-          border-color: slateblue;
-          box-shadow: none;
-          transition: all 0.5s ease;
-        }
-      }
-    }
+  h1 {
+    font-size: 32px;
   }
-  & .modal_wrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 0.7rem;
-    & .modal_bx {
-      position: relative;
-      width: 100%;
-      min-width: 300px;
-      width: 100%;
-      max-width: 600px;
-      background-color: #ffffff;
-      border-radius: 6px;
-      padding: 1rem;
-      box-shadow: -4px 6px 8px rgba(0, 0, 0, 0.48);
-      border: 2px solid #f7f7f7;
-      & .top__ {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 0.4rem;
-        border-bottom: 2px solid #d5d5d5;
-        & .cancel {
-          position: relative;
-          font-size: 17px;
-          background: none;
-          cursor: pointer;
-          padding: 0.1rem 0.3rem;
-          color: red;
-          border: none;
-          outline: none;
-        }
-      }
-      & .content {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 0;
-        & .cnt {
-          & a {
-            color: #4c4a4c;
-          }
-        }
-        & .copy_btn {
-          position: relative;
-          border: 1px solid #ccc;
-          margin-left: 10px;
-          background: none;
-          cursor: pointer;
-          color: #000000;
-          padding: 0.35rem;
-          transition: all 0.5s ease;
-          &:hover {
-            background: #d5d5d5;
-            color: #fff;
-          }
-          & .copy_icn {
-            height: 290px;
-            height: 22px;
-          }
-        }
-      }
-    }
-  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.fancy-button {
+  background-color: purple;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.fancy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fancy-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fancy-input {
+  background-color: white;
+  border: 2px solid purple;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+  max-width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.fancy-input:focus {
+  border-color: blue;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) inset;
+}
+
+/* The modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  position: absolute; /* Position the modal in the center of the page */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the origin */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%; /*d be more or less, depending on screen size */
+  max-width: 567px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* The close button */
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  right: 10px;
+}
+
+.fancy-link {
+  color: purple;
+  font-size: 18px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  text-decoration: underline;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

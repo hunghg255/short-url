@@ -1,3 +1,14 @@
+import ToastjsTiny from 'toastjs-tiny';
+
+export const toast = {
+  success: (text: string) => {
+    return new ToastjsTiny({ text });
+  },
+  error: (text: string) => {
+    return new ToastjsTiny({ text, type: 'error' });
+  },
+};
+
 export const makeId = (length: number) => {
   let id = '';
 

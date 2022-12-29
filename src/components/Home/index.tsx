@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 import './Home.scss';
-import copy from '../../assets/image/copy-svgrepo-com.svg';
-import { makeId } from '../../utils';
+import { makeId, toast } from '../../utils';
 import { addDoc, collection } from '@firebase/firestore';
 
 import { db } from '../../config/index';
@@ -14,6 +13,8 @@ function Home() {
     showModal: false,
     shortUrl: '',
   });
+
+  const host = window.location.href;
 
   const submitUrl = async (e: { preventDefault: () => void }) => {
     if (loading) return;
@@ -41,66 +42,76 @@ function Home() {
     setLoading(false);
   };
 
-  const disableModal = async () => {
+  const onCopyShortUrl = async () => {
     try {
       await navigator.clipboard.writeText(host + shortUrl);
       document.execCommand('Copy');
-      alert('Link coppied to Clipboard');
+      toast.success('Link coppied to Clipboard');
     } catch (err) {
-      alert('Failed to copy!');
+      toast.error('Failed to copy!');
     }
   };
-  const host = window.location.href;
 
   return (
     <div className='outter_container'>
+      <h1>Short Url</h1>
       <div className='form_holder'>
         <form id='form__submnt' onSubmit={submitUrl}>
           <input
             type='text'
             name='url'
-            id='url_'
-            className='url_'
             value={url}
             onChange={(e) => {
               setState((_) => ({ ..._, url: e.target.value }));
             }}
             placeholder='Enter or Paste url here'
             required
+            className='fancy-input'
           />
-          <input type='submit' id='sub_go' className='sub_go' value='GO' />
+          <button className='fancy-button' type='submit'>
+            Submit
+          </button>
         </form>
       </div>
-      {showModal ? (
-        <div className='modal_wrapper'>
-          <div className='modal_bx'>
-            <div className='top__'>
-              <button
-                onClick={() => setState((_) => ({ ..._, showModal: false }))}
-                className='cancel'
-              >
-                X
-              </button>
-            </div>
-            <div className='content'>
-              <p className='cnt'>
-                <a target='_blank' href={host + shortUrl} rel='noreferrer'>
-                  {host + shortUrl}
-                </a>
-              </p>
-              <button
-                className='copy_btn'
-                onClick={() => {
-                  disableModal();
-                }}
-              >
-                <img src={copy} alt='' className='copy_icn' />
-              </button>
+      {showModal && (
+        <div id='myModal' className='modal'>
+          <div className='modal-content'>
+            <span
+              className='close'
+              onClick={() => setState((_) => ({ ..._, showModal: false }))}
+            >
+              &times;
+            </span>
+            <div>
+              <div className='content'>
+                <p className='cnt'>
+                  <a
+                    target='_blank'
+                    className='fancy-link'
+                    href={host + shortUrl}
+                    rel='noreferrer'
+                  >
+                    {host + shortUrl}
+                  </a>
+                </p>
+                <button className='fancy-button' onClick={onCopyShortUrl}>
+                  <svg
+                    width={24}
+                    height={24}
+                    xmlns='http://www.w3.org/2000/svg'
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                  >
+                    <path
+                      fill='white'
+                      d='M17 7h6v16h-16v-6h-6v-16h16v6zm5 1h-14v14h14v-14zm-6-1v-5h-14v14h5v-9h9z'
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      ) : (
-        <div></div>
       )}
     </div>
   );
